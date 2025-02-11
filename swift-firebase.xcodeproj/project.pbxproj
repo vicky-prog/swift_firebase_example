@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2BA4C82D5B566D00F30BBF /* spalsh_screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BA4C72D5B566D00F30BBF /* spalsh_screen.swift */; };
 		2F5EB1EC2D5AED5200B14CB5 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB1EB2D5AED5200B14CB5 /* Tests_iOS.swift */; };
 		2F5EB1EE2D5AED5200B14CB5 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB1ED2D5AED5200B14CB5 /* Tests_iOSLaunchTests.swift */; };
 		2F5EB1F82D5AED5200B14CB5 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB1F72D5AED5200B14CB5 /* Tests_macOS.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F2BA4C72D5B566D00F30BBF /* spalsh_screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spalsh_screen.swift; sourceTree = "<group>"; };
 		2F5EB1D32D5AED5000B14CB5 /* swift_firebaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_firebaseApp.swift; sourceTree = "<group>"; };
 		2F5EB1D42D5AED5000B14CB5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2F5EB1D52D5AED5200B14CB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				2FF5BEA72D5B14760097BF0A /* Loginview.swift */,
+				2F2BA4C72D5B566D00F30BBF /* spalsh_screen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			files = (
 				2FF5BEA82D5B14760097BF0A /* Loginview.swift in Sources */,
 				2FF5BEA62D5B0ADB0097BF0A /* authViewModel.swift in Sources */,
+				2F2BA4C82D5B566D00F30BBF /* spalsh_screen.swift in Sources */,
 				2F5EB1FD2D5AED5200B14CB5 /* ContentView.swift in Sources */,
 				2F5EB1FB2D5AED5200B14CB5 /* swift_firebaseApp.swift in Sources */,
 				2FF5BEA42D5B03840097BF0A /* firebase_service.swift in Sources */,

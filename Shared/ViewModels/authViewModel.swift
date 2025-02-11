@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import FirebaseAuth
 
 final class AuthViewModel: ObservableObject{
  
@@ -14,6 +15,17 @@ final class AuthViewModel: ObservableObject{
     @Published var errorMessage:String? = nil
     @Published var isLoading:Bool = false
     private var cancellables = Set<AnyCancellable>()
+    
+    init(){
+        checkIfSignedIn()
+    }
+    
+    func checkIfSignedIn(){
+        if let firebaseUser = Auth.auth().currentUser{
+            let userModel = User(id: firebaseUser.uid, email: firebaseUser.email ?? "", displayName: firebaseUser.displayName ?? "")
+            self.user = userModel;
+        }
+    }
     
     func signIn(email:String,password:String){
         setLoading(true)

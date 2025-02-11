@@ -21,7 +21,7 @@ struct swift_firebaseApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            Loginview()
+            SplashScreen()
         }
     }
 }

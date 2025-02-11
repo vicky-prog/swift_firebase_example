@@ -14,6 +14,11 @@ struct Loginview: View {
     @State private var isCreatingUser: Bool = false
     
     var body: some View {
+        Group{
+            
+            if let firebaseUser = authViewModel.user{
+                HomeView(user: firebaseUser, viewModel: authViewModel)
+            }else{
         VStack(spacing:20){
             TextField("Email",text:$email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -59,6 +64,8 @@ struct Loginview: View {
             HomeView(user: user, viewModel: authViewModel)
            
         }
+            }
+    }
     }
 }
 
