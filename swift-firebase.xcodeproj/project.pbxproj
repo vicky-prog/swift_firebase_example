@@ -131,7 +131,6 @@
 				2FF5BE9D2D5B01260097BF0A /* ViewModels */,
 				2FF5BE9C2D5B00DF0097BF0A /* Models */,
 				2F5EB1D32D5AED5000B14CB5 /* swift_firebaseApp.swift */,
-				2FF5BE9A2D5AFE720097BF0A /* GoogleService-Info.plist */,
 				2F5EB1D42D5AED5000B14CB5 /* ContentView.swift */,
 				2F5EB1D52D5AED5200B14CB5 /* Assets.xcassets */,
 			);
@@ -210,6 +209,7 @@
 		2FF5BEA02D5B01510097BF0A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FF5BE9A2D5AFE720097BF0A /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

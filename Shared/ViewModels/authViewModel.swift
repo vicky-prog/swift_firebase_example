@@ -12,32 +12,41 @@ final class AuthViewModel: ObservableObject{
  
     @Published var user:User? = nil
     @Published var errorMessage:String? = nil
+    @Published var isLoading:Bool = false
     private var cancellables = Set<AnyCancellable>()
     
     func signIn(email:String,password:String){
-        FirebaseService.shared.sigIn(email: email, password: password)
+        setLoading(true)
+        FirebaseService.shared.signIn(email: email, password: password)
             .sink(receiveCompletion: { completion in
                 
                 if case .failure(let error) = completion {
                                    self.errorMessage = error.localizedDescription
+                    self.setLoading(false)
                                }
             },
            receiveValue: { user in
                                   self.user = user
+                self.setLoading(false)
+
                               })
             .store(in: &cancellables)
     }
     
     
     func createUser(email:String,password:String){
-        FirebaseService.shared.createUSer(email: email, password: password)
+        setLoading(true)
+
+        FirebaseService.shared.createUser(email: email, password: password)
             .sink(receiveCompletion: { completion in
-                if case .failure(let error) = completion{
-                    self.errorMessage = error.localizedDescription
-                }
-                
+                self.handleCompletion(completion)
             }, receiveValue: { user in
                 print("User creation complete.")
+                self.user = user;
+                    
+                
+                self.setLoading(false)
+
             })
             .store(in: &cancellables)
     }
@@ -52,6 +61,21 @@ final class AuthViewModel: ObservableObject{
                 self.errorMessage = error.localizedDescription
             }
         }
+    
+    
+    private func setLoading(_ loading: Bool) {
+            self.isLoading = loading
+            if loading {
+                self.errorMessage = nil // Clear error when starting a new operation
+            }
+        }
+    
+    private func handleCompletion(_ completion: Subscribers.Completion<Error>) {
+          if case .failure(let error) = completion {
+              self.errorMessage = "Error: \(error.localizedDescription)"
+              self.setLoading(false)
+          }
+      }
     
 }
 

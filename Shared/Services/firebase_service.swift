@@ -14,7 +14,7 @@ final class FirebaseService{
     static let shared = FirebaseService()
     private let auth = Auth.auth()
     
-    func sigIn(email:String,password:String) -> Future<User,Error>{
+    func signIn(email:String,password:String) -> Future<User,Error>{
         return Future{ promise in
             self.auth.signIn(withEmail: email, password: password){ result, error in
                 if let error = error{
@@ -29,13 +29,15 @@ final class FirebaseService{
         }
     }
     
-    func createUSer(email:String,password:String) -> Future<Void,Error>{
+    func createUser(email:String,password:String) -> Future<User,Error>{
         return Future{ promise in
-            self.auth.createUser(withEmail: email, password: password){_,error in
+            self.auth.createUser(withEmail: email, password: password){result,error in
+                print(result as Any)
                 if let error = error{
                     promise(.failure(error))
-                } else {
-                    promise(.success(()))
+                } else if let user = result?.user {
+                    let userModel = User(id: user.uid, email: user.email ?? "", displayName: user.displayName ?? "");
+                    promise(.success(userModel))
                 }
                 
             }

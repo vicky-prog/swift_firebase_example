@@ -16,7 +16,12 @@ struct Loginview: View {
     var body: some View {
         VStack(spacing:20){
             TextField("Email",text:$email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
             SecureField("Password",text:$password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             Button(action:{
                 if isCreatingUser {
                                   authViewModel.createUser(email: email, password: password)
@@ -24,7 +29,17 @@ struct Loginview: View {
                                   authViewModel.signIn(email: email, password: password)
                               }
             }){
+                if authViewModel.isLoading {
+                    ProgressView("Please Wait...")
+                                      .progressViewStyle(CircularProgressViewStyle())
+                }else{
                 Text(!isCreatingUser ? "SignIn":"Create User")
+                    .frame(maxWidth: .infinity,maxHeight: 0)
+                    .padding()
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                }
             }
             
             Button(action: {
