@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct Loginview: View {
     @StateObject private var authViewModel = AuthViewModel()
     @State private var email:String = ""
     @State private var password:String = ""
     @State private var isCreatingUser: Bool = false
+    
+    fileprivate func loginAction() {
+        if isCreatingUser {
+            authViewModel.createUser(email: email, password: password)
+        } else {
+            authViewModel.signIn(email: email, password: password)
+        }
+    }
     
     var body: some View {
         Group{
@@ -28,11 +37,7 @@ struct Loginview: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             Button(action:{
-                if isCreatingUser {
-                                  authViewModel.createUser(email: email, password: password)
-                              } else {
-                                  authViewModel.signIn(email: email, password: password)
-                              }
+                loginAction()
             }){
                 if authViewModel.isLoading {
                     ProgressView("Please Wait...")
@@ -76,21 +81,52 @@ struct Loginview_Previews: PreviewProvider {
 }
 
 
-struct HomeView: View {
-    let user: User
-    @ObservedObject var viewModel: AuthViewModel
-    
-    var body: some View {
-        VStack {
-            Text("Welcome, \(user.email)!")
-                .font(.headline)
-            Button("Sign Out") {
-                viewModel.signOut()
-            }
-            .padding()
-            .background(Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-        }
-    }
-}
+//struct HomeView: View {
+//    let user: User
+//    @ObservedObject var viewModel: AuthViewModel
+////    @Environment(\.managedObjectContext) private var viewContext
+////       @FetchRequest(
+////           entity: Task.entity(),
+////           sortDescriptors: [NSSortDescriptor(keyPath: \Task.createdAt, ascending: false)]
+////       )
+//    //private var tasks: FetchedResults<MyTask>
+//    
+//    var body: some View {
+//        VStack {
+//            Text("Welcome, \(user.email)!")
+//                .font(.headline)
+//            Button("Sign Out") {
+//                viewModel.signOut()
+//            }
+//            .padding()
+//            .background(Color.red)
+//            .foregroundColor(.white)
+//            .cornerRadius(8)
+////
+////            List {
+////                           ForEach(tasks) { task in
+////                               VStack(alignment: .leading) {
+////                                   Text(task.task).font(.headline)
+////                                   //Text("Age: \(user.age)").font(.subheadline)
+////                               }
+////                           }
+////                       }
+////                       Button("Add User") {
+////                           addTask(name: "Task One", context: viewContext)
+////                       }
+//        }
+//    }
+//    
+////    func addTask(name: String,  context: NSManagedObjectContext) {
+////           let newTask = Task(context: context)
+////           newTask.id = UUID()
+////           newTask.task = name
+////           newTask.createdAt = Date()
+////
+////           do {
+////               try context.save()
+////           } catch {
+////               print("Failed to save task: \(error)")
+////           }
+////       }
+//}
